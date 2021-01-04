@@ -13,7 +13,7 @@ namespace Gbros.UniRx.MessageBrokerSamples.Example3
             if (areaTrigger == null) return;
 
             var message = ZoneEnterMessage.Create(areaTrigger.ZoneType);
-            MessageBrokerExtensions.Publish(MessageBroker.Default, message);
+            message.Publish();
         }
     }
 }

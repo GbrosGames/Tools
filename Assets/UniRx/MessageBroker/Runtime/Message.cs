@@ -13,7 +13,7 @@ namespace Gbros.UniRx
     {
         public void Publish()
         {
-            MessageBrokerExtensions.Publish(MessageBroker.Default, this);
+            MessageBroker.Default.PublishMessage(this);
         }
     }
 }

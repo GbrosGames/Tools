@@ -19,12 +19,8 @@ namespace Gbros.UniRx.MessageBrokerSamples.Example3
         {
             text = GetComponent<Text>();
 
-            whenPlayerEntersNewZone = MessageBrokerExtensions.Receive<ZoneEnterMessage>(MessageBroker.Default
-);
-
-            whenPlayerEntersNewZone
-                .Subscribe(Display)
-                .AddTo(this);
+            whenPlayerEntersNewZone = MessageBroker.Default.ReceiveMessage<ZoneEnterMessage>();
+            whenPlayerEntersNewZone.Subscribe(Display).AddTo(this);
         }
 
         private void Display(ZoneEnterMessage request)

@@ -10,7 +10,7 @@ namespace Gbros.UniRx.MessageBrokerSamples.Example3
         {
             MessageBroker
                 .Default
-                .Receive<ZoneEnterMessage>()
+                .ReceiveMessage<ZoneEnterMessage>()
                 .Subscribe(PlaySound)
                 .AddTo(this);
         }

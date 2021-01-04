@@ -11,7 +11,7 @@ namespace Gbros.UniRx.MessageBrokerSamples.Example2
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 var message = ColorSwitchMessage.Create(Random.ColorHSV());
-                MessageBroker.Default.Publish(message);
+                message.Publish();
             }
         }
     }
