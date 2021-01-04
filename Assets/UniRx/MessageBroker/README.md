@@ -8,14 +8,13 @@ Since unity doesn't support git dependencies in package.json you have to [instal
 
 Edit manifest.json file in your Unity Packages directory 
 
-```
+
 ```
 {
   "dependencies": {
     "com.gbros.blog.unirx.messagebroker": "https://github.com/GbrosGames/Blog.git?path=Assets/UniRx/MessageBroker",
-    "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts",
+    "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts"
 }
-```
 ```
 
 Or install via url
