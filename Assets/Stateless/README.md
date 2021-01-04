@@ -14,7 +14,7 @@ Edit manifest.json file in your Unity Packages directory
 }
 ```
 
-Or install via url
+Or [install](https://docs.unity3d.com/2020.2/Documentation/Manual/upm-ui-giturl.html) via url
 
 ```
 https://github.com/GbrosGames/Blog.git?path=Assets/Stateless
