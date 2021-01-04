@@ -327,8 +327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bb0fbb8b81ccc74184f5b8baa333ec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chestOpenClip: {fileID: 7400000, guid: 27b38f053a2a000458341e9037862246, type: 2}
-  chestCloseClip: {fileID: 7400000, guid: 568202721773c2a46aaa64d33f787e27, type: 2}
+  openClip: {fileID: 7400000, guid: 27b38f053a2a000458341e9037862246, type: 2}
+  closeClip: {fileID: 7400000, guid: 568202721773c2a46aaa64d33f787e27, type: 2}
 --- !u!111 &798708731
 Animation:
   m_ObjectHideFlags: 0
