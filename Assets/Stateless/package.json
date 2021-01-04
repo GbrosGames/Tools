@@ -21,11 +21,10 @@
   "author": "Gbros Games Studio <gbros.games.studio@gmail.com> (https://github.com/GbrosGames)",
   "samples": [
     {
-      "displayName": "Examples",
+      "displayName": "Samples",
       "description": "Pack of examples how to use Stateless library",
       "path": "Samples~"
     }
-
   ],
   "type": "sample"
 }

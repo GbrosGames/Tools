@@ -4,9 +4,6 @@
   "description": "Resources for blog post about UniRx Library used in Unity.",
   "license": "MIT",
   "version": "1.0.0",
-  "dependencies": {
-    "com.neuecc.unirx": "7.2.0"
-  },
   "keywords": [
     "UniRx",
     "MessageBroker",
