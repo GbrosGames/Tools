@@ -23,7 +23,7 @@ Or [install](https://docs.unity3d.com/2020.2/Documentation/Manual/upm-ui-giturl.
 https://github.com/GbrosGames/Blog.git?path=Assets/UniRx/MessageBroker
 ```
 ```
-https://github.com/GbrosGames/Blog.git?path=Assets/UniRx/MessageBroker
+https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts
 ```
 
 
