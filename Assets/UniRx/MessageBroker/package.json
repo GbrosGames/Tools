@@ -23,5 +23,9 @@
       "path": "Samples~"
     }
   ],
-  "type": "sample"
+  "type": "sample",
+  "dependencies": {
+    "com.unity.2d.sprite": "1.0.0",
+    "com.unity.2d.spriteshape": "5.1.0"
+  }
 }
