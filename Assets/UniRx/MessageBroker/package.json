@@ -5,7 +5,7 @@
   "license": "MIT",
   "version": "1.0.0",
   "dependencies": {
-    "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts"
+    "com.neuecc.unirx": "7.2.0"
   },
   "keywords": [
     "UniRx",
@@ -21,7 +21,7 @@
   "author": "Gbros Games Studio <gbros.games.studio@gmail.com> (https://github.com/GbrosGames)",
   "samples": [
     {
-      "displayName": "Examples",
+      "displayName": "Samples",
       "description": "Pack of examples how to use UniRx library",
       "path": "Samples~"
     }
