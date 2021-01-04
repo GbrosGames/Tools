@@ -1,0 +1,31 @@
+{
+  "name": "com.gbros.blog.stateless",
+  "displayName": "Gbros - Stateless",
+  "description": "Resources for blog post about Stateless Library used in Unity.\nStateless.dll attached to this project is under Apache 2.0 License.\nVisit stateless project repository for more information https://github.com/dotnet-state-machine/stateless ",
+  "license": "MIT",
+  "version": "1.0.0",
+  "references": [
+    "Stateless"
+  ],
+  "keywords": [
+    "Stateless",
+    "State",
+    "Design Pattern",
+    "Gbros"
+  ],
+  "category": "Tutorial",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GbrosGames/blog-stateless.git"
+  },
+  "author": "Gbros Games Studio <gbros.games.studio@gmail.com> (https://github.com/GbrosGames)",
+  "samples": [
+    {
+      "displayName": "Examples",
+      "description": "Pack of examples how to use Stateless library",
+      "path": "Samples~"
+    }
+
+  ],
+  "type": "sample"
+}
