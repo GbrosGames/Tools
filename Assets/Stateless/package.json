@@ -16,7 +16,7 @@
   "category": "Tutorial",
   "repository": {
     "type": "git",
-    "url": "https://github.com/GbrosGames/blog-stateless.git"
+    "url": "https://github.com/GbrosGames/Blog.git?path=Assets/Stateless"
   },
   "author": "Gbros Games Studio <gbros.games.studio@gmail.com> (https://github.com/GbrosGames)",
   "samples": [
