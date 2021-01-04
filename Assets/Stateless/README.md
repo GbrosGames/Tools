@@ -7,13 +7,11 @@ Blog post resources.
 Edit manifest.json file in your Unity Packages directory 
 
 ```
-```
 {
   "dependencies": {
     "com.gbros.blog.stateless": "https://github.com/GbrosGames/Blog.git?path=Assets/Stateless",
     
 }
-```
 ```
 
 Or install via url
