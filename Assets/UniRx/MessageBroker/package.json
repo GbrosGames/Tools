@@ -23,5 +23,8 @@
       "path": "Samples~"
     }
   ],
-  "type": "sample"
+  "type": "sample",
+  "dependencies": {
+    "com.unity.2d.sprite": "1.0.0"
+  }
 }
