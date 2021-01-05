@@ -1,18 +1,17 @@
 ﻿using UniRx;
 using UnityEngine;
-using UnityEngine.U2D;
 
 namespace Gbros.UniRx.MessageBrokerSamples.Example2
 {
-    [RequireComponent(typeof(SpriteShapeRenderer))]
+    [RequireComponent(typeof(SpriteRenderer))]
     [AddComponentMenu(Constants.ComponentPath + nameof(ColorSwitcher))]
     public class ColorSwitcher : MonoBehaviour
     {
-        private SpriteShapeRenderer spriteShapeRenderer;
+        private SpriteRenderer spriteRenderer;
 
         private void Awake()
         {
-            spriteShapeRenderer = GetComponent<SpriteShapeRenderer>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
 
             MessageBroker.Default
                 .Receive<ColorSwitchMessage>()
@@ -22,7 +21,7 @@ namespace Gbros.UniRx.MessageBrokerSamples.Example2
 
         private void SwitchColor(ColorSwitchMessage request)
         {
-            spriteShapeRenderer.color = request.Color;
+            spriteRenderer.color = request.Color;
         }
     }
 }
