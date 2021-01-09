@@ -19,6 +19,7 @@ namespace Gbros.StatelessSamples.Example4
 
             var interactable = interactablesInRange.Last();
             interactable.StartInteraction();
+            interactablesInRange.Remove(interactable);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
