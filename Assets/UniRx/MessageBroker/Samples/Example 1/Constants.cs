@@ -2,6 +2,6 @@
 {
     public class Constants
     {
-        public const string ComponentPath = "MessageBrokerSamples/Example 1/";
+        public const string ComponentPath = "_MessageBrokerSamples/Example 1/";
     }
 }

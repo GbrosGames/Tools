@@ -2,7 +2,7 @@
 {
     public class Constants
     {
-        public const string ComponentPath = "StatelessSamples/Example 3/";
+        public const string ComponentPath = "_StatelessSamples/Example 3/";
     }
 }
 
