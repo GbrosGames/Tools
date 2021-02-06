@@ -1,4 +1,4 @@
-# [BLOG](https://github.com/GbrosGames/Blog) - [Stateless](https://github.com/dotnet-state-machine/stateless)
+# [BLOG](https://www.gbrosgames.com/post/stateless-in-unity) - [Stateless](https://github.com/dotnet-state-machine/stateless)
 
 Blog post resources.
 
