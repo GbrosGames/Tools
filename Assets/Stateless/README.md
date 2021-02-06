@@ -1,6 +1,6 @@
-# [BLOG](https://www.gbrosgames.com/post/stateless-in-unity) - [Stateless](https://github.com/dotnet-state-machine/stateless)
+# [Stateless in Unity](https://www.gbrosgames.com/post/stateless-in-unity)
 
-Blog post resources.
+Blog post resources of [Stateless](https://github.com/dotnet-state-machine/stateless) library
 
 ## Package Installation 
 
