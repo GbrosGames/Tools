@@ -12,7 +12,7 @@ Edit manifest.json file in your Unity Packages directory
 ```
 {
   "dependencies": {
-    "com.gbros.blog.unirx.messagebroker": "https://github.com/GbrosGames/Blog.git?path=Assets/UniRx/PowerObservables",
+    "com.gbros.blog.unirx.powerobservables": "https://github.com/GbrosGames/Blog.git?path=Assets/UniRx/PowerObservables",
     "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts"
 }
 ```
