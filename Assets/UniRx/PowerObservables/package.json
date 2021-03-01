@@ -1,0 +1,28 @@
+{
+  "name": "com.gbros.blog.unirx.powerobservables",
+  "displayName": "Gbros - UniRx - PowerObservables",
+  "description": "PowerObservables - UniRx toolbox",
+  "license": "MIT",
+  "version": "1.0.0",
+  "keywords": [
+    "UniRx",
+    "Gbros"
+  ],
+  "category": "Utilities",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GbrosGames/Blog.git?path=Assets/UniRx/PowerObservables"
+  },
+  "author": "Gbros Games Studio <gbros.games.studio@gmail.com> (https://github.com/GbrosGames)",
+  "samples": [
+    {
+      "displayName": "Samples",
+      "description": "Pack of examples how to use UniRx library",
+      "path": "Samples~"
+    }
+  ],
+  "type": "sample",
+  "dependencies": {
+    "com.unity.2d.sprite": "1.0.0"
+  }
+}
