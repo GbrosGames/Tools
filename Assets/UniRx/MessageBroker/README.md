@@ -1,6 +1,6 @@
 # [BLOG](https://github.com/GbrosGames/Blog) - [UniRx](https://github.com/neuecc/UniRx) - MessageBroker
 
-Blog post resources.
+Useful tools and blog post resources.
 
 ## Package Installation 
 
