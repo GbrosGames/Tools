@@ -11,7 +11,7 @@ namespace Gbros.UniRx.PowerObservablesSamples.Example1
     {
         [SerializeField] private BoolReactiveProperty pause = new BoolReactiveProperty();
         [SerializeField] private Text hintText;
-        private Text text;
+        private Text text;                                      // UI text component reference 
 
         void Awake()
         {
@@ -41,10 +41,9 @@ namespace Gbros.UniRx.PowerObservablesSamples.Example1
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                pause.Value = !pause.Value;                     // toggle when spacebar pressed
-            }
+            if (!Input.GetKeyDown(KeyCode.Space)) return;       // reteurn if spacebar is not pressed
+
+            pause.Value = !pause.Value;                         // toggle pause
         }
     }
 }
