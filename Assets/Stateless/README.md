@@ -9,7 +9,7 @@ Edit manifest.json file in your Unity Packages directory
 ```
 {
   "dependencies": {
-    "com.gbros.blog.stateless": "https://github.com/GbrosGames/Blog.git?path=Assets/Stateless"
+    "com.gbros.blog.stateless": "https://github.com/GbrosGames/Tools.git?path=Assets/Stateless"
     
 }
 ```
@@ -17,7 +17,7 @@ Edit manifest.json file in your Unity Packages directory
 Or [install](https://docs.unity3d.com/2020.2/Documentation/Manual/upm-ui-giturl.html) via url
 
 ```
-https://github.com/GbrosGames/Blog.git?path=Assets/Stateless
+https://github.com/GbrosGames/Tools.git?path=Assets/Stateless
 ```
 
 ## Examples
