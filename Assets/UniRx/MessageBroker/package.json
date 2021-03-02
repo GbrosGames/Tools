@@ -1,7 +1,7 @@
 {
-  "name": "com.gbros.blog.unirx.messagebroker",
+  "name": "com.gbros.tools.unirx.messagebroker",
   "displayName": "Gbros - UniRx - MessageBroker",
-  "description": "Resources for blog post about UniRx Library used in Unity.",
+  "description": "Usefull UniRx tools and blog post resources. See more on our blog post - https://www.gbrosgames.com/blog",
   "license": "MIT",
   "version": "1.0.0",
   "keywords": [
@@ -13,7 +13,7 @@
   "category": "Tutorial",
   "repository": {
     "type": "git",
-    "url": "https://github.com/GbrosGames/Blog.git?path=Assets/UniRx/MessageBroker"
+    "url": "https://github.com/GbrosGames/Tools.git?path=Assets/UniRx/MessageBroker"
   },
   "author": "Gbros Games Studio <gbros.games.studio@gmail.com> (https://github.com/GbrosGames)",
   "samples": [

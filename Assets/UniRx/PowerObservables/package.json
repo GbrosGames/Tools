@@ -1,7 +1,7 @@
 {
-  "name": "com.gbros.blog.unirx.powerobservables",
+  "name": "com.gbros.tools.unirx.powerobservables",
   "displayName": "Gbros - UniRx - PowerObservables",
-  "description": "PowerObservables - UniRx toolbox",
+  "description": "Usefull UniRx tools and blog post resources. See more on our blog post - https://www.gbrosgames.com/blog",
   "license": "MIT",
   "version": "1.0.0",
   "keywords": [
@@ -11,7 +11,7 @@
   "category": "Utilities",
   "repository": {
     "type": "git",
-    "url": "https://github.com/GbrosGames/Blog.git?path=Assets/UniRx/PowerObservables"
+    "url": "https://github.com/GbrosGames/Tools.git?path=Assets/UniRx/PowerObservables"
   },
   "author": "Gbros Games Studio <gbros.games.studio@gmail.com> (https://github.com/GbrosGames)",
   "samples": [

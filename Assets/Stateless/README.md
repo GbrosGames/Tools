@@ -9,7 +9,7 @@ Edit manifest.json file in your Unity Packages directory
 ```
 {
   "dependencies": {
-    "com.gbros.blog.stateless": "https://github.com/GbrosGames/Tools.git?path=Assets/Stateless"
+    "com.gbros.tools.stateless": "https://github.com/GbrosGames/Tools.git?path=Assets/Stateless"
     
 }
 ```
