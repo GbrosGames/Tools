@@ -14,7 +14,7 @@ namespace Gbros.UniRx
         /// <returns></returns>
         public static IObservable<TimeSpan> PausableInterval(IObservable<bool> pause, float tick = DefaultTick, IScheduler scheduler = null)
         {
-            scheduler = scheduler ?? DefaultScheduler;
+            scheduler ??= DefaultScheduler;
             return Observable.Interval(TimeSpan.FromSeconds(tick), scheduler).WithLatestFrom(pause.StartWith(false), (_, isPaused) => (intervalTick: TimeSpan.FromSeconds(tick), isPaused))
                          .Where(x => !x.isPaused)
                          .Select(x => x.intervalTick);

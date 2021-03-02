@@ -14,7 +14,7 @@ namespace Gbros.UniRx
         /// <returns></returns>
         public static IObservable<TimeSpan> TimerInterval(float duration, float tick = DefaultTick, IScheduler scheduler = null)
         {
-            scheduler = scheduler ?? DefaultScheduler;
+            scheduler ??= DefaultScheduler;
             return Observable
               .Interval(TimeSpan.FromSeconds(tick), scheduler)
               .Select(_ => TimeSpan.FromSeconds(tick)).TakeUntil(Observable.Timer(TimeSpan.FromSeconds(duration)))
@@ -31,7 +31,7 @@ namespace Gbros.UniRx
         /// <returns></returns>
         public static IObservable<TimeSpan> TimerInterval(IObservable<bool> pause, float duration, float tick = DefaultTick, IScheduler scheduler = null)
         {
-            scheduler = scheduler ?? DefaultScheduler;
+            scheduler ??= DefaultScheduler;
             return PausableInterval(pause, tick, scheduler)
                   .TakeUntil(Observable.Timer(TimeSpan.FromSeconds(duration), scheduler));
         }

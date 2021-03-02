@@ -14,7 +14,7 @@ namespace Gbros.UniRx
         /// <returns></returns>
         public static IObservable<TimeSpan> TimerCountedInterval(float duration, float tick = DefaultTick, IScheduler scheduler = null)
         {
-            scheduler = scheduler ?? DefaultScheduler;
+            scheduler ??= DefaultScheduler;
             return CountedInterval(tick, scheduler)
                   .TakeUntil(Observable.Timer(TimeSpan.FromSeconds(duration), scheduler));
         }
@@ -29,7 +29,7 @@ namespace Gbros.UniRx
         /// <returns></returns>
         public static IObservable<TimeSpan> TimerCountedInterval(IObservable<bool> pause, float duration, float tick = DefaultTick, IScheduler scheduler = null)
         {
-            scheduler = scheduler ?? DefaultScheduler;
+            scheduler ??= DefaultScheduler;
             return CountedInterval(pause, tick, scheduler)
                 .TakeUntil(Observable.Timer(TimeSpan.FromSeconds(duration), scheduler));
         }

@@ -13,7 +13,7 @@ namespace Gbros.UniRx
         /// <returns></returns>
         public static IObservable<TimeSpan> CountedInterval(float tick = DefaultTick, IScheduler scheduler = null)
         {
-            scheduler = scheduler ?? DefaultScheduler;
+            scheduler ??= DefaultScheduler;
             return Observable
                 .Interval(TimeSpan.FromSeconds(tick), scheduler)
                 .Scan(TimeSpan.Zero, (result, item) => result += TimeSpan.FromSeconds(tick));

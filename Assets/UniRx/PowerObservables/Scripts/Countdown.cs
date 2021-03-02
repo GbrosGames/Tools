@@ -14,7 +14,7 @@ namespace Gbros.UniRx
         /// <returns></returns>
         public static IObservable<TimeSpan> Countdown(float initialTime, float tick = DefaultTick, IScheduler scheduler = null)
         {
-            scheduler = scheduler ?? DefaultScheduler;
+            scheduler ??= DefaultScheduler;
             return Observable.Interval(TimeSpan.FromSeconds(tick), scheduler)
                   .Scan(TimeSpan.FromSeconds(initialTime), (result, item) => result -= TimeSpan.FromSeconds(tick))
                   .TakeWhile(timeLeft => timeLeft > TimeSpan.Zero);
