@@ -14,6 +14,7 @@ Edit manifest.json file in your Unity Packages directory
   "dependencies": {
     "com.gbros.tools.unirx.powerobservables": "https://github.com/GbrosGames/Tools.git?path=Assets/UniRx/PowerObservables",
     "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts"
+  }
 }
 ```
 
