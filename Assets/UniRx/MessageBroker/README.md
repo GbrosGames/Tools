@@ -12,7 +12,7 @@ Edit manifest.json file in your Unity Packages directory
 ```
 {
   "dependencies": {
-    "com.gbros.blog.unirx.messagebroker": "https://github.com/GbrosGames/Tools.git?path=Assets/UniRx/MessageBroker",
+    "com.gbros.tools.unirx.messagebroker": "https://github.com/GbrosGames/Tools.git?path=Assets/UniRx/MessageBroker",
     "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts"
 }
 ```
