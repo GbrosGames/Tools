@@ -41,7 +41,7 @@ namespace Gbros.UniRx.PowerObservablesSamples.Example1
 
         void Update()
         {
-            if (!Input.GetKeyDown(KeyCode.Space)) return;       // reteurn if spacebar is not pressed
+            if (!Input.GetKeyDown(KeyCode.Space)) return;       // return if spacebar is not pressed
 
             pause.Value = !pause.Value;                         // toggle pause
         }
