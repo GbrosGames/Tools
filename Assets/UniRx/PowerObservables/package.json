@@ -3,7 +3,7 @@
   "displayName": "Gbros - UniRx - PowerObservables",
   "description": "Usefull UniRx tools and blog post resources. See more on our blog post - https://www.gbrosgames.com/blog",
   "license": "MIT",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "keywords": [
     "UniRx",
     "Gbros"
@@ -18,11 +18,11 @@
     {
       "displayName": "Samples",
       "description": "Pack of examples how to use UniRx library",
-      "path": "Samples~"
+      "path": "Samples~",
+      "dependencies": {
+        "com.unity.2d.sprite": "1.0.0"
+      }
     }
   ],
-  "type": "sample",
-  "dependencies": {
-    "com.unity.2d.sprite": "1.0.0"
-  }
+  "type": "sample"
 }
