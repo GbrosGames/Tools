@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor;
 using UnityEditor.UIElements;
-using System.Collections.Generic;
-using static UnityEditor.Experimental.GraphView.GraphView;
 using System.Reflection;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace Gbros.Watchers
 {
@@ -32,9 +31,7 @@ namespace Gbros.Watchers
         [MenuItem("Window/Watchers")]
         public static void OpenWindow()
         {
-            Debug.LogWarning("halo");
             var window = GetWindow<WatcherEditor>();
-            Debug.LogWarning(window);
             window.titleContent = new GUIContent(nameof(Watchers));
         }
 
@@ -58,8 +55,6 @@ namespace Gbros.Watchers
 
             // Import UXML
             var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(Watchers.EditorUXMLPath);
-            Debug.LogWarning(Watchers.EditorUXMLPath);
-            Debug.LogWarning(visualTree);
             visualTree.CloneTree(root);
 
             // A stylesheet can be added to a VisualElement.
