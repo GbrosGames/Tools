@@ -8,9 +8,6 @@
     "UniRx",
     "Gbros"
   ],
-  "dependencies": {
-    "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts"
-  },
   "category": "Editor",
   "repository": {
     "type": "git",
