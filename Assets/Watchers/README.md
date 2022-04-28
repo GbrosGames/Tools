@@ -1,13 +1,8 @@
-# [BLOG](https://github.com/GbrosGames/Blog) - Watchers
+# Watchers
 
 Watchers is a collection of handy windows and extensions that will speed up your workflow and make your life easier. See more on our blog post - https://www.gbrosgames.com/blog
 
 ## Package Installation 
-
-Since unity doesn't support git dependencies in package.json you have to [install UniRx](https://github.com/neuecc/UniRx#upm-package) manually. 
-
-Edit manifest.json file in your Unity Packages directory 
-
 
 ```
 {
