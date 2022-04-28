@@ -1,0 +1,25 @@
+{
+  "name": "com.gbros.tools.watchers",
+  "displayName": "Gbros - Watchers",
+  "description": "Watchers is a collection of handy windows and extensions that will speed up your workflow and make your life easier. See more on our blog post - https://www.gbrosgames.com/blog",
+  "license": "MIT",
+  "version": "1.0.0",
+  "keywords": [
+    "UniRx",
+    "Gbros"
+  ],
+  "category": "Editor",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GbrosGames/Tools.git?path=Assets/Watchers"
+  },
+  "author": "Gbros Games Studio <gbros.games.studio@gmail.com> (https://github.com/GbrosGames)",
+  "samples": [
+    {
+      "displayName": "Samples",
+      "description": "Pack of examples how to use Watchers",
+      "path": "Samples~"
+    }
+  ],
+  "type": "sample"
+}

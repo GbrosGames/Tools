@@ -1,0 +1,93 @@
+GridBackground {
+    --grid-background-color: rgb(40, 40, 40);
+    --line-color: rgba(193, 196, 192, 0.1);
+    --thick-line-color: rgba(193, 196, 192, 0.1);
+    --spacing: 10;
+}
+
+WatcherCard {
+   margin-top:5px;
+   border-color:black;
+   border-width: 1px;
+   border-radius:5px;
+   padding: 5px;
+
+   align-content:flex-start;
+   align-items:stretch;
+   align-self:auto;
+}
+
+WatcherCardContainer {
+   margin-top:5px;
+   border-color:black;
+   border-width: 1px;
+   border-radius:5px;
+   padding: 5px;
+   background-color:#3F3F3F;
+
+   align-content:flex-start;
+   align-items:stretch;
+   align-self:auto;
+}
+
+
+.watcher-topbar-button {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-width: 0;
+}
+
+.watcher-topbar-button-active {
+    border-top-color:green;
+    border-top-width:2px;
+}
+
+.watcher-sidebar-button {
+}
+
+.watcher-sidebar-button-active {
+    border-bottom-color:green;
+    border-bottom-width:2px;
+}
+
+.watcher-card-container-title {
+    -unity-font-style: bold;
+    color:white;
+}
+
+TextField {
+    white-space: normal;
+}
+
+#title-label {
+    color:white;
+    flex-grow:1;
+}
+
+#title {
+    background-color:#3F3F3F;
+}
+
+.node {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-color:#4C4C4C;
+    padding:5px;
+    margin: 10px;
+    align-items:flex-start;
+    align-items:stretch;
+}
+
+.unity-text-element {
+    color:white;
+}
+
+#unity-text-input {
+    min-width:50px;
+}
+
+.unity-composite-field__field-spacer {
+    display:none;
+}
