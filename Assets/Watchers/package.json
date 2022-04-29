@@ -16,9 +16,9 @@
   "author": "Gbros Games Studio <gbros.games.studio@gmail.com> (https://github.com/GbrosGames)",
   "samples": [
     {
-      "displayName": "Samples",
+      "displayName": "Examples",
       "description": "Pack of examples how to use Watchers",
-      "path": "Samples~"
+      "path": "Examples~"
     }
   ],
   "type": "sample"
