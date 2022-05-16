@@ -31,7 +31,6 @@ WatcherCardContainer {
 }
 
 WatcherSelector {
-    margin: 5px;
     flex-direction:row;
     justify-content: space-between;
     align-items:center;
@@ -43,6 +42,7 @@ left-panel {
 
 WatcherSelector > #title {
     background-color: none;
+    margin:5px;
 }
 
 WatcherSelector > #remove {
