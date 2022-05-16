@@ -94,8 +94,8 @@ namespace Gbros.Watchers
                 if (e is not WatcherSelector watcherSelector) return;
                 var watcher = Watchers.List[i];
                 watcherSelector.Bind(watcher);
-                watcherSelector.RemoveButton.clicked += () => 
-                { 
+                watcherSelector.RemoveButton.clicked += () =>
+                {
                     Watchers.Delete(watcher.Key);
                 };
             };
@@ -172,6 +172,8 @@ namespace Gbros.Watchers
             boardContainer.Clear();
             boardContainer.Add(currentBoard);
 
+            if (currentBoard is null) return;
+
             currentBoard.StretchToParentSize();
             currentBoard.contentContainer.StretchToParentSize();
             currentBoard.contentViewContainer.StretchToParentSize();
@@ -204,7 +206,8 @@ namespace Gbros.Watchers
         private void OnWatcherCreated(Watcher watcher)
         {
             Watchers.Logger?.Invoke($"Watchers: Editor - adding {watcher.Key} to left panel");
-            sidebar.Sort((x, y) => string.Compare(x.viewDataKey, y.viewDataKey));
+            Watchers.List.Sort((x, y) => string.Compare(x.Key, y.Key));
+            sidebar.Rebuild();
         }
 
         private void OnWatcherDeleted(Watcher watcher)
