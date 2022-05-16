@@ -52,6 +52,10 @@ WatcherSelector > #remove {
     unity-font-size:bold;
 }
 
+.unity-collection-view__item--selected {
+   border-bottom-color:green;
+   border-bottom-width:2px;
+}
 
 .watcher-topbar-button {
     border-bottom-left-radius: 0;
