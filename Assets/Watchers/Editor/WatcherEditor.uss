@@ -30,11 +30,37 @@ WatcherCardContainer {
    align-self:auto;
 }
 
+WatcherSelector {
+    margin: 5px;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items:center;
+}
+
+left-panel {
+    width:200px;
+}
+
+WatcherSelector > #title {
+    background-color: none;
+}
+
+WatcherSelector > #remove {
+    color: #F80000;
+    background-color:none;
+    border-width: 0px;
+    unity-font-size:bold;
+}
+
 
 .watcher-topbar-button {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     border-bottom-width: 0;
+}
+
+#left-panel {
+    width: 220px;
 }
 
 .watcher-topbar-button-active {

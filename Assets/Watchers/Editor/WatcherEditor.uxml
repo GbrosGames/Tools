@@ -1,8 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Watchers/Editor/WatcherEditor.uss?fileID=7433441132597879392&amp;guid=02cce2d1fce6d064a91c16e5e97c8ab3&amp;type=3#WatcherEditor" />
     <WatcherSplitView>
-        <ui:VisualElement name="left-panel" style="flex-grow: 1;" />
+        <ui:VisualElement name="left-panel" style="flex-grow: 1; width: auto;">
+            <ui:ListView focusable="true" />
+        </ui:VisualElement>
         <ui:VisualElement name="right-panel">
-            <uie:Toolbar style="flex-grow: 0;" />
+            <ui:ScrollView mode="Horizontal" vertical-scroller-visibility="Hidden" style="height: auto;" />
             <ui:VisualElement name="board-container" style="flex-grow: 1;" />
         </ui:VisualElement>
     </WatcherSplitView>

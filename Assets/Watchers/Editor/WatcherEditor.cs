@@ -6,6 +6,8 @@ using UnityEditor;
 using UnityEditor.UIElements;
 using System.Reflection;
 using static UnityEditor.Experimental.GraphView.GraphView;
+using System.Collections.Generic;
+using System;
 
 namespace Gbros.Watchers
 {
@@ -24,8 +26,9 @@ namespace Gbros.Watchers
         private VisualElement boardContainer;
         private VisualElement rightPanel;
 
-        private Toolbar topbar;
-        private VisualElement sidebar;
+        private ScrollView topbar;
+        // private ScrollView sidebar;
+        private ListView sidebar;
 
 
         [MenuItem("Window/Watchers")]
@@ -63,9 +66,12 @@ namespace Gbros.Watchers
             root.styleSheets.Add(styleSheet);
 
             rightPanel = root.Q<VisualElement>("right-panel");
-            sidebar = root.Q<VisualElement>("left-panel");
+            // sidebar = root.Q<VisualElement>("left-panel").Q<ScrollView>();
+            sidebar = root.Q<VisualElement>("left-panel").Q<ListView>();
+
             boardContainer = rightPanel.Q<VisualElement>("board-container");
-            topbar = rightPanel.Q<Toolbar>();
+            topbar = rightPanel.Q<ScrollView>();
+            // topbar = rightPanel.Q<Toolbar>().Q<ScrollView>();
 
             Watchers.Deleted -= OnWatcherDeleted;
             Watchers.Created -= OnWatcherCreated;
@@ -81,6 +87,27 @@ namespace Gbros.Watchers
             }
 
             ChangeCurrentWatcher(Watchers.All.Values.OrderBy(x => x.Key).FirstOrDefault());
+
+            sidebar.makeItem = () => new WatcherSelector();
+            sidebar.bindItem = (e, i) =>
+            {
+                if (e is not WatcherSelector watcherSelector) return;
+                var watcher = Watchers.List[i];
+                watcherSelector.Bind(watcher);
+                watcherSelector.RemoveButton.clicked += () => 
+                { 
+                    Watchers.Delete(watcher.Key);
+                };
+            };
+            sidebar.itemsSource = Watchers.List;
+            sidebar.selectionType = SelectionType.Single;
+            sidebar.onSelectionChange += OnWatcherSelectorSelectionChanged;
+        }
+
+        private void OnWatcherSelectorSelectionChanged(IEnumerable<object> obj)
+        {
+            var currentSelection = obj.FirstOrDefault() as Watcher;
+            ChangeCurrentWatcher(currentSelection);
         }
 
         private void OnWatchersCleared()
@@ -171,26 +198,21 @@ namespace Gbros.Watchers
             boardContainer?.Clear();
             sidebar?.Clear();
             topbar?.Clear();
+            sidebar?.Rebuild();
         }
 
         private void OnWatcherCreated(Watcher watcher)
         {
             Watchers.Logger?.Invoke($"Watchers: Editor - adding {watcher.Key} to left panel");
-
-            var button = new Button(() => { ChangeCurrentWatcher(watcher); }) { name = watcher.Key, viewDataKey = watcher.Key, text = watcher.Key };
-            button.AddToClassList(WatcherSidebarButtonClassName);
-
-            sidebar.Add(button);
-            sidebar.Sort((x,y) => string.Compare(x.viewDataKey, y.viewDataKey));
+            sidebar.Sort((x, y) => string.Compare(x.viewDataKey, y.viewDataKey));
         }
 
         private void OnWatcherDeleted(Watcher watcher)
         {
             Watchers.Logger?.Invoke($"Watchers: Editor - adding {watcher.Key} to left panel");
 
-            if (!sidebar.TryQ<Button>(out var button, watcher.Key)) return;
-
-            sidebar.Remove(button);
+            // if (!sidebar.TryQ<Button>(out var button, watcher.Key)) return;
+            sidebar.Rebuild();
 
             if (currentWatcher?.Key == watcher.Key)
             {

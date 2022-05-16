@@ -12,18 +12,19 @@ namespace Gbros.Watchers
     {
         public static CompositeDisposable Disposables { get; private set; } = new CompositeDisposable();
         public static Dictionary<string, Watcher> All = new Dictionary<string, Watcher>();
+        public static List<Watcher> List = new List<Watcher>();
         public static event Action<Watcher> Created;
         public static event Action<Watcher> Deleted;
         public static event Action Cleared;
         public const string Default = nameof(Watcher);
 
-        public static string DefaultEditorStylePath = "Packages/com.gbros.tools.watchers/Editor/WatcherEditor.uss";
-        public static string DefaultEditorUXMLPath = "Packages/com.gbros.tools.watchers/Editor/WatcherEditor.uxml";
+        public const string DefaultEditorPath = "Packages/com.gbros.tools.watchers/Editor/";
+        public static string DefaultEditorStylePath = $"{DefaultEditorPath}WatcherEditor.uss";
+        public static string DefaultEditorUXMLPath = $"{DefaultEditorPath}WatcherEditor.uxml";
+        public static string EditorStylePath = $"{DefaultEditorPath}WatcherEditor.uss";
+        public static string EditorUXMLPath = $"{DefaultEditorPath}WatcherEditor.uxml";
 
         public static Action<string> Logger { get; set; } = null;
-        public static string EditorStylePath = DefaultEditorStylePath;
-        public static string EditorUXMLPath = DefaultEditorUXMLPath;
-
         public static Watcher Watcher(string key = Default)
         {
             Watchers.Logger?.Invoke($"Watchers: Trying to get watcher {key}");
@@ -39,6 +40,7 @@ namespace Gbros.Watchers
 
             item = new Watcher(key);
             All.Add(key, item);
+            List.Add(item);
 
             Created?.Invoke(item);
 
@@ -59,6 +61,7 @@ namespace Gbros.Watchers
                 watcher.Dispose();
             }
             All.Remove(key);
+            List.Remove(watcher);
             Deleted?.Invoke(watcher);
         }
 
@@ -80,6 +83,7 @@ namespace Gbros.Watchers
         public static void Cleanup()
         {
             All.Clear();
+            List.Clear();
             Watchers.Logger?.Invoke($"Watchers: Clearing watchers - disposing {Disposables.Count} watchers");
             Disposables.Dispose();
             Cleared?.Invoke();
