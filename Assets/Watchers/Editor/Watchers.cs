@@ -11,13 +11,11 @@ namespace Gbros.Watchers
     public static class Watchers
     {
         public static CompositeDisposable Disposables { get; private set; } = new CompositeDisposable();
-        public static Dictionary<string, Watcher> All = new Dictionary<string, Watcher>();
-        public static List<Watcher> List = new List<Watcher>();
+        public static List<Watcher> All = new List<Watcher>();
         public static event Action<Watcher> Created;
         public static event Action<Watcher> Deleted;
         public static event Action Cleared;
         public const string Default = nameof(Watcher);
-
         public const string DefaultEditorPath = "Packages/com.gbros.tools.watchers/Editor/";
         public static string DefaultEditorStylePath = $"{DefaultEditorPath}WatcherEditor.uss";
         public static string DefaultEditorUXMLPath = $"{DefaultEditorPath}WatcherEditor.uxml";
@@ -28,8 +26,9 @@ namespace Gbros.Watchers
         public static Watcher Watcher(string key = Default)
         {
             Watchers.Logger?.Invoke($"Watchers: Trying to get watcher {key}");
-            
-            if (All.TryGetValue(key, out var item))
+
+            var item = All.Find(x => x.Key == key);
+            if (item is not null)
             {
                 if (!Disposables.Contains(item))
                 {
@@ -39,8 +38,7 @@ namespace Gbros.Watchers
             }
 
             item = new Watcher(key);
-            All.Add(key, item);
-            List.Add(item);
+            All.Add(item);
 
             Created?.Invoke(item);
 
@@ -55,13 +53,15 @@ namespace Gbros.Watchers
 
         public static void Delete(string key = Default)
         {
-            if (!All.TryGetValue(key, out var watcher)) return;
+            var watcher = All.Find(x => x.Key == key);
+            if (watcher is null) return;
+
             if (!watcher.IsDisposed)
             {
                 watcher.Dispose();
             }
-            All.Remove(key);
-            List.Remove(watcher);
+            
+            All.Remove(watcher);
             Deleted?.Invoke(watcher);
         }
 
@@ -83,7 +83,7 @@ namespace Gbros.Watchers
         public static void Cleanup()
         {
             All.Clear();
-            List.Clear();
+            All.Clear();
             Watchers.Logger?.Invoke($"Watchers: Clearing watchers - disposing {Disposables.Count} watchers");
             Disposables.Dispose();
             Cleared?.Invoke();

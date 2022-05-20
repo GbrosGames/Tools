@@ -6,9 +6,7 @@ using UnityEngine.UIElements;
 
 public class WatcherSelector : VisualElement, IWatcherElement
 {
-
     public Label Title { get; }
-    public Button RemoveButton { get; }
     public Watcher Watcher { get; private set; }
 
     public WatcherSelector(Watcher watcher)
@@ -20,10 +18,7 @@ public class WatcherSelector : VisualElement, IWatcherElement
     public WatcherSelector()
     {
         Title = new Label();
-        RemoveButton = new Button() { text = "X" };
-
         this.Add("title", Title);
-        this.Add("remove", RemoveButton);
     }
 
     public void Bind(Watcher watcher)

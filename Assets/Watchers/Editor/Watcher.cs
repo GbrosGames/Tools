@@ -16,17 +16,18 @@ namespace Gbros.Watchers
             Key = key;
         }
 
-        public Dictionary<string, WatcherBoard> Boards { get; private set; } = new Dictionary<string, WatcherBoard>();
+        public List<WatcherBoard> Boards { get; private set; } = new List<WatcherBoard>();
         public Dictionary<object, SerializedObject> SerializedObjects { get; private set; } = new Dictionary<object, SerializedObject>();
 
         public string Key { get; }
 
         public WatcherBoard Board(string key, Action<WatcherBoard> callback = null)
         {
-            if (Boards.TryGetValue(key, out var item)) return item;
+            var item = Boards.Find(x => x.viewDataKey == key);
+            if (item is not null) return item;
 
             item = new WatcherBoard(this, key);
-            Boards.Add(key, item);
+            Boards.Add(item);
 
             callback?.Invoke(item);
 
@@ -36,7 +37,7 @@ namespace Gbros.Watchers
 
         public void Cleanup()
         {
-            foreach (var item in Boards.Values)
+            foreach (var item in Boards)
             {
                 item.Clear();
             }
