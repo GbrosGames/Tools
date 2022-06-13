@@ -1,6 +1,6 @@
 # Watchers
 
-Watchers is a collection of handy windows and extensions that will speed up your workflow and make your life easier. See more on our blog post - https://www.gbrosgames.com/blog
+Watchers is a collection of handy windows and extensions that will speed up your workflow and make your life easier. See more on our [blog post](https://www.gbrosgames.com/posts/Watchers/)
 
 ## Package Installation 
 
