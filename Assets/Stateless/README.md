@@ -1,4 +1,4 @@
-# [Stateless in Unity](https://www.gbrosgames.com/post/stateless-in-unity)
+# [Stateless in Unity](https://www.gbrosgames.com/posts/Stateless-in-Unity)
 
 Blog post resources of [Stateless](https://github.com/dotnet-state-machine/stateless) library
 
