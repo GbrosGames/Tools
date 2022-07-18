@@ -6,6 +6,7 @@ using UnityEditor;
 using System.Reflection;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using System.Collections.Generic;
+using System;
 
 namespace Gbros.Watchers
 {
@@ -18,29 +19,33 @@ namespace Gbros.Watchers
         public const string WatcherCardTitleClassName = "watcher-card-container-title";
 
 
-        private Watcher currentWatcher;
-        private WatcherBoard currentBoard;
+        public Watcher CurrentWatcher { get; private set; }
+        public WatcherBoard CurrentBoard { get; private set; }
+        public VisualElement BoardContainer { get; private set; }
+        
+        public VisualElement LeftPanel { get; private set; }
+        public VisualElement RightPanel { get; private set; }
 
-        private VisualElement boardContainer;
-        private VisualElement leftPanel;
-        private VisualElement rightPanel;
-
-        private ScrollView topbar;
-        private ListView sidebar;
+        public ScrollView Topbar { get; private set; }
+        public ScrollView Sidebar { get; private set; }
 
 
         [MenuItem("Window/Watchers")]
         public static void OpenWindow()
         {
+            Create();
+        }
+
+        public static WatcherEditor Create()
+        {
             var window = GetWindow<WatcherEditor>();
             window.titleContent = new GUIContent(nameof(Watchers));
+            return window;
         }
 
         [MenuItem("Assets/Create/Watchers Stylesheet")]
         public static void CreateStylesheet()
         {
-            var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(Watchers.DefaultEditorStylePath);
-
             var getActiveFolderPath = typeof(ProjectWindowUtil).GetMethod("GetActiveFolderPath", BindingFlags.Static | BindingFlags.NonPublic);
             var directory = (string)getActiveFolderPath.Invoke(null, null);
 
@@ -63,13 +68,18 @@ namespace Gbros.Watchers
             var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(Watchers.EditorStylePath);
             root.styleSheets.Add(styleSheet);
 
-            rightPanel = root.Q<VisualElement>("right-panel");
-            leftPanel = root.Q<VisualElement>("left-panel");
+            Initialize();
+        }
 
-            sidebar = leftPanel.Q<ListView>();
-            topbar = rightPanel.Q<ScrollView>();
+        private void Initialize()
+        {
+            RightPanel = rootVisualElement.Q<VisualElement>("right-panel");
+            LeftPanel = rootVisualElement.Q<VisualElement>("left-panel");
 
-            boardContainer = rightPanel.Q<VisualElement>("board-container");
+            Topbar = RightPanel.Q<ScrollView>();
+            Sidebar = LeftPanel.Q<ScrollView>();
+
+            BoardContainer = RightPanel.Q<VisualElement>("board-container");
 
             Watchers.Deleted -= OnWatcherDeleted;
             Watchers.Created -= OnWatcherCreated;
@@ -79,6 +89,7 @@ namespace Gbros.Watchers
             Watchers.Created += OnWatcherCreated;
             Watchers.Cleared += OnWatchersCleared;
 
+            
             foreach (var watcher in Watchers.All)
             {
                 OnWatcherCreated(watcher);
@@ -86,31 +97,7 @@ namespace Gbros.Watchers
 
             ChangeCurrentWatcher(Watchers.All.OrderBy(x => x.Key).FirstOrDefault());
 
-            InitializeSidebar();
-        }
-
-        private void InitializeSidebar()
-        {
-            sidebar.makeItem = () => new WatcherSelector();
-            sidebar.bindItem = (element, i) =>
-            {
-                if (element is not WatcherSelector watcherSelector) return;
-
-                Watchers.All.Sort((x, y) => string.Compare(x.Key, y.Key));
-
-                var watcher = Watchers.All[i];
-
-                watcherSelector.Bind(watcher);
-
-                element.AddManipulator(new ContextualMenuManipulator((ContextualMenuPopulateEvent evt) =>
-                {
-                    evt.menu.AppendAction("Delete", (e) => Watchers.Delete(watcher.Key));
-                }));
-
-            };
-            sidebar.itemsSource = Watchers.All;
-            sidebar.selectionType = SelectionType.Single;
-            sidebar.onSelectionChange += OnWatcherSelectorSelectionChanged;
+            Watchers.EditorCallbacks?.Invoke(this);
         }
 
         private void OnWatcherSelectorSelectionChanged(IEnumerable<object> obj)
@@ -124,71 +111,76 @@ namespace Gbros.Watchers
             Cleanup();
         }
 
-        private void ChangeCurrentWatcher(Watcher watcher)
+        public void ChangeCurrentWatcher(Watcher watcher)
         {
-            if (currentWatcher is not null && sidebar.TryQ<Button>(out var button, currentWatcher.Key))
+            if (CurrentWatcher is not null && LeftPanel.TryQ<WatcherSelector>(out var selector, CurrentWatcher.Key))
             {
-                button.RemoveFromClassList(WatcherSidebarButtonActiveClassName);
+                selector.RemoveFromClassList(WatcherSidebarButtonActiveClassName);
             }
 
-            currentWatcher = watcher;
+            CurrentWatcher = watcher;
             OnCurrentWatcherChanged();
         }
 
         private void OnCurrentWatcherChanged()
         {
-            topbar.Clear();
+            Topbar.Clear();
 
-            if (currentWatcher is null) return;
+            if (CurrentWatcher is null) return;
 
-            if (sidebar.TryQ<Button>(out var sidebarButton, currentWatcher.Key))
+            if (LeftPanel.TryQ<WatcherSelector>(out var selector, CurrentWatcher.Key))
             {
-                sidebarButton.AddToClassList(WatcherSidebarButtonActiveClassName);
+                selector.AddToClassList(WatcherSidebarButtonActiveClassName);
             }
 
-            topbar.Clear();
+            Topbar.Clear();
 
-            foreach (var board in currentWatcher.Boards)
+            foreach (var board in CurrentWatcher.Boards)
             {
                 var button = new Button(() => { ChangeCurrentBoard(board); }) { name = board.name, viewDataKey = board.viewDataKey, text = board.name };
                 button.AddToClassList(WatcherTopbarButtonClassName);
-                topbar.Add(button);
+                Topbar.Add(button);
             }
 
-            topbar.Sort((x, y) => string.Compare(x.viewDataKey, y.viewDataKey));
+            Topbar.Sort((x, y) => string.Compare(x.viewDataKey, y.viewDataKey));
 
-            ChangeCurrentBoard(currentWatcher.Boards.OrderBy(x => x.viewDataKey).FirstOrDefault());
+            ChangeCurrentBoard(CurrentWatcher.Boards.OrderBy(x => x.viewDataKey).FirstOrDefault());
         }
 
-        private void ChangeCurrentBoard(WatcherBoard board)
+        public void ChangeCurrentBoard(WatcherBoard board)
         {
-            if (currentBoard is not null && topbar.TryQ<Button>(out var button, currentBoard.viewDataKey))
+            if (CurrentWatcher != board?.Watcher)
+            {
+                ChangeCurrentWatcher(board?.Watcher);
+            }
+            
+            if (CurrentBoard is not null && Topbar.TryQ<Button>(out var button, CurrentBoard.viewDataKey))
             {
                 button.RemoveFromClassList(WatcherTopbarButtonActiveClassName);
             }
 
-            currentBoard = board;
+            CurrentBoard = board;
             OnCurrentBoardChanged();
         }
 
         private void OnCurrentBoardChanged()
         {
-            if (currentBoard is not null && topbar.TryQ<Button>(out var button, currentBoard.viewDataKey))
+            if (CurrentBoard is not null && Topbar.TryQ<Button>(out var button, CurrentBoard.viewDataKey))
             {
                 button.AddToClassList(WatcherTopbarButtonActiveClassName);
             }
 
-            boardContainer.Clear();
-            boardContainer.Add(currentBoard);
+            BoardContainer.Clear();
+            BoardContainer.Add(CurrentBoard);
 
-            if (currentBoard is null) return;
+            if (CurrentBoard is null) return;
 
-            currentBoard.StretchToParentSize();
-            currentBoard.contentContainer.StretchToParentSize();
-            currentBoard.contentViewContainer.StretchToParentSize();
-            currentBoard.MarkDirtyRepaint();
+            CurrentBoard.StretchToParentSize();
+            CurrentBoard.contentContainer.StretchToParentSize();
+            CurrentBoard.contentViewContainer.StretchToParentSize();
+            CurrentBoard.MarkDirtyRepaint();
 
-            var layer = rightPanel.Q<Layer>();
+            var layer = RightPanel.Q<Layer>();
             layer.StretchToParentSize();
 
             layer.style.position = Position.Relative;
@@ -196,7 +188,7 @@ namespace Gbros.Watchers
             layer.style.flexShrink = 0;
             layer.style.flexWrap = Wrap.Wrap;
 
-            foreach (var item in currentBoard.graphElements)
+            foreach (var item in CurrentBoard.graphElements)
             {
                 item.style.position = Position.Relative;
                 item.UpdatePresenterPosition();
@@ -206,26 +198,57 @@ namespace Gbros.Watchers
 
         private void Cleanup()
         {
-            boardContainer?.Clear();
-            sidebar?.Clear();
-            topbar?.Clear();
-            sidebar?.Rebuild();
+            BoardContainer?.Clear();
+            Topbar?.Clear();
+            Sidebar?.Clear();
+            LeftPanel?.Clear();
         }
 
         private void OnWatcherCreated(Watcher watcher)
         {
             Watchers.Logger?.Invoke($"Watchers: Editor - adding {watcher.Key} to left panel");
-            sidebar.Rebuild();
+            
+            var watcherSelector = new WatcherSelector(watcher);
+            watcherSelector.clicked += () => ChangeCurrentWatcher(watcher);
+
+            if (watcher.GroupKey is not null)
+            {
+                var keys = watcher.GroupKey.Split('\\');
+
+                VisualElement currentElement = Sidebar;
+                
+                for (var i = 0; i < keys.Length; i++)
+                {
+                    var key = keys[i];
+
+                    if (!currentElement.TryQ<Foldout>(out var foldout, key))
+                    {
+                        foldout = new Foldout
+                        {
+                            name = key,
+                            text = key
+                        };
+
+                        currentElement.Add(foldout);
+                    }
+
+                    currentElement = foldout;
+                    
+                }
+
+                currentElement.Add(watcherSelector);
+            }
+            else
+            {
+                Sidebar.Add(watcherSelector);
+            }
         }
 
         private void OnWatcherDeleted(Watcher watcher)
         {
             Watchers.Logger?.Invoke($"Watchers: Editor - adding {watcher.Key} to left panel");
 
-            // if (!sidebar.TryQ<Button>(out var button, watcher.Key)) return;
-            sidebar.Rebuild();
-
-            if (currentWatcher?.Key == watcher.Key)
+            if (CurrentWatcher?.Key == watcher.Key)
             {
                 ChangeCurrentWatcher(Watchers.All.FirstOrDefault());
             }

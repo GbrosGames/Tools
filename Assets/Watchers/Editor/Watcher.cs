@@ -11,19 +11,24 @@ namespace Gbros.Watchers
     {
         public bool IsDisposed { get; private set; }
         public CompositeDisposable Disposables { get; } = new CompositeDisposable();
-        public Watcher(string key = Watchers.Default)
+        
+        internal Watcher(string key = Watchers.Default, string groupKey = null)
         {
             Key = key;
+            GroupKey = groupKey;
         }
 
         public List<WatcherBoard> Boards { get; private set; } = new List<WatcherBoard>();
         public Dictionary<object, SerializedObject> SerializedObjects { get; private set; } = new Dictionary<object, SerializedObject>();
 
         public string Key { get; }
+        public string GroupKey { get; }
+
 
         public WatcherBoard Board(string key, Action<WatcherBoard> callback = null)
         {
             var item = Boards.Find(x => x.viewDataKey == key);
+
             if (item is not null) return item;
 
             item = new WatcherBoard(this, key);
@@ -54,6 +59,7 @@ namespace Gbros.Watchers
             Disposables.Clear();
             Cleanup();
             Watchers.Delete(Key);
+
         }
     }
 }

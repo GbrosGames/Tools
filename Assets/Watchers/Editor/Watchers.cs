@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UniRx;
 using UnityEditor;
+using UnityEngine.UIElements;
 
 namespace Gbros.Watchers
 {
@@ -23,9 +24,10 @@ namespace Gbros.Watchers
         public static string EditorUXMLPath = $"{DefaultEditorPath}WatcherEditor.uxml";
 
         public static Action<string> Logger { get; set; } = null;
-        public static Watcher Watcher(string key = Default)
+
+        public static Watcher Watcher(string key = Default, string groupKey = null, Action<Watcher> callback = null)
         {
-            Watchers.Logger?.Invoke($"Watchers: Trying to get watcher {key}");
+            Logger?.Invoke($"Watchers: Trying to get watcher {key}");
 
             var item = All.Find(x => x.Key == key);
             if (item is not null)
@@ -34,10 +36,14 @@ namespace Gbros.Watchers
                 {
                     Disposables.Add(item);
                 }
+
+                callback?.Invoke(item);
+
                 return item;
             }
 
-            item = new Watcher(key);
+            item = new Watcher(key, groupKey);
+
             All.Add(item);
 
             Created?.Invoke(item);
@@ -47,8 +53,24 @@ namespace Gbros.Watchers
 
             Disposables.Add(item);
 
-            Watchers.Logger?.Invoke($"Watchers: watcher {key} - created");
+            Logger?.Invoke($"Watchers: watcher {key} - created");
+
+            callback?.Invoke(item);
             return item;
+        }
+
+        internal static Action<WatcherEditor> EditorCallbacks;
+
+        public static void RegisterEditorCallback(Action<WatcherEditor> callback)
+        {
+            if (callback is null) return;
+            EditorCallbacks += callback;
+        }
+
+        public static void UnregisterEditorCallback(Action<WatcherEditor> callback)
+        {
+            if (callback is null) return;
+            EditorCallbacks -= callback;
         }
 
         public static void Delete(string key = Default)
@@ -60,7 +82,7 @@ namespace Gbros.Watchers
             {
                 watcher.Dispose();
             }
-            
+
             All.Remove(watcher);
             Deleted?.Invoke(watcher);
         }
@@ -76,17 +98,17 @@ namespace Gbros.Watchers
         private static void OnPlayModeStateChanged(PlayModeStateChange value)
         {
             if (value != PlayModeStateChange.ExitingPlayMode) return;
-            Watchers.Logger?.Invoke($"Watchers: Clearing watchers - count {All.Count}");
+            Logger?.Invoke($"Watchers: Clearing watchers - count {All.Count}");
             Cleanup();
         }
 
         public static void Cleanup()
         {
             All.Clear();
-            All.Clear();
-            Watchers.Logger?.Invoke($"Watchers: Clearing watchers - disposing {Disposables.Count} watchers");
+            Logger?.Invoke($"Watchers: Clearing watchers - disposing {Disposables.Count} watchers");
             Disposables.Dispose();
             Cleared?.Invoke();
+            EditorCallbacks = null;
         }
     }
 }

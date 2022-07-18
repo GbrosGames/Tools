@@ -14,6 +14,7 @@ namespace Gbros.Watchers
         public static IDisposable BindTo(this Vector3Field field, IObservable<Vector3> observable) => observable.SubscribeWithState(field, (x, state) => state.value = x);
         public static IDisposable BindTo(this Vector2Field field, IObservable<Vector2> observable) => observable.SubscribeWithState(field, (x, state) => state.value = x);
         public static IDisposable BindTo(this Toggle field, IObservable<bool> observable) => observable.SubscribeWithState(field, (x, state) => state.value = x);
+        public static IDisposable BindTo<TEnum>(this EnumField field, IObservable<TEnum> observable) where TEnum: Enum => observable.SubscribeWithState(field, (x, state) => state.value = x);
     }
 }
 #endif

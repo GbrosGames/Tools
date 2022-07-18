@@ -18,9 +18,13 @@ namespace Gbros.Watchers
 
             this.name = name;
             viewDataKey = name;
+
             Card = card;
-            Title = new Label(name);
-            Title.viewDataKey = name;
+
+            Title = new Label(name)
+            {
+                viewDataKey = name
+            };
             Title.AddToClassList(WatcherEditor.WatcherCardTitleClassName);
 
             Add(Title);

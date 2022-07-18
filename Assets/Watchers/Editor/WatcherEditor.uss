@@ -34,6 +34,26 @@ WatcherSelector {
     flex-direction:row;
     justify-content: space-between;
     align-items:center;
+	margin-left:0px;
+	margin-right:0px;
+    background-color:transparent;
+    border-width:0px;
+	border-bottom-left-radius:0px;
+	border-bottom-right-radius:0px;
+}
+
+WatcherSelector:hover {
+    background-color:#323232;
+}
+
+.watcher-sidebar-button-active {
+    border-bottom-color:green;
+    border-bottom-width:2px;
+	background-color: #585858;
+}
+
+.watcher-sidebar-button-active:hover {
+	background-color: #585858;
 }
 
 left-panel {
@@ -68,10 +88,6 @@ WatcherSelector > #title {
 .watcher-sidebar-button {
 }
 
-.watcher-sidebar-button-active {
-    border-bottom-color:green;
-    border-bottom-width:2px;
-}
 
 .watcher-card-container-title {
     -unity-font-style: bold;
@@ -113,4 +129,8 @@ TextField {
 
 .unity-composite-field__field-spacer {
     display:none;
+}
+
+.unity-foldout__toggle{
+	margin-left:0px;
 }
