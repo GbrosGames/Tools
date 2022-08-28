@@ -4,7 +4,7 @@
 
 # Tools for Unity
 
-## More details on our [blog](https://www.gbrosgames.com/blog)
+## More details on our [blog](https://www.gbrosgames.com)
 
 - [Stateless in Unity](https://www.gbrosgames.com/posts/Stateless-in-Unity) - [Examples](https://github.com/GbrosGames/Tools?path=Assets/Stateless)
 - [MessageBroker](https://www.gbrosgames.com/posts/UniRx-Series-Part-1-MessageBroker) - [Examples](https://github.com/GbrosGames/Tools?path=Assets/UniRx/MessageBroker)
