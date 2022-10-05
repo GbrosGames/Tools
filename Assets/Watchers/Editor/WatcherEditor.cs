@@ -113,9 +113,9 @@ namespace Gbros.Watchers
 
         public void ChangeCurrentWatcher(Watcher watcher)
         {
-            if (CurrentWatcher is not null && LeftPanel.TryQ<WatcherSelector>(out var selector, CurrentWatcher.Key))
+            if (CurrentWatcher is not null)
             {
-                selector.RemoveFromClassList(WatcherSidebarButtonActiveClassName);
+                CurrentWatcher.Selector.RemoveFromClassList(WatcherSidebarButtonActiveClassName);
             }
 
             CurrentWatcher = watcher;
@@ -128,10 +128,7 @@ namespace Gbros.Watchers
 
             if (CurrentWatcher is null) return;
 
-            if (LeftPanel.TryQ<WatcherSelector>(out var selector, CurrentWatcher.Key))
-            {
-                selector.AddToClassList(WatcherSidebarButtonActiveClassName);
-            }
+            CurrentWatcher.Selector.AddToClassList(WatcherSidebarButtonActiveClassName);
 
             Topbar.Clear();
 

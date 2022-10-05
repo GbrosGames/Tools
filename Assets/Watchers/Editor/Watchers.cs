@@ -5,7 +5,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using UniRx;
 using UnityEditor;
-using UnityEngine.UIElements;
 
 namespace Gbros.Watchers
 {
@@ -17,9 +16,9 @@ namespace Gbros.Watchers
         public static event Action<Watcher> Deleted;
         public static event Action Cleared;
         public const string Default = nameof(Watcher);
-        
+
         public const string DefaultEditorPath = "Packages/com.gbros.tools.watchers/Editor/";
-        
+
         public static string DefaultEditorStylePath = $"{DefaultEditorPath}WatcherEditor.uss";
         public static string DefaultEditorUXMLPath = $"{DefaultEditorPath}WatcherEditor.uxml";
         public static string EditorStylePath = $"{DefaultEditorPath}WatcherEditor.uss";
@@ -31,7 +30,7 @@ namespace Gbros.Watchers
         {
             Logger?.Invoke($"Watchers: Trying to get watcher {key}");
 
-            var item = All.Find(x => x.Key == key);
+            var item = All.Find(x => x.Path == groupKey + key);
             if (item is not null)
             {
                 if (!Disposables.Contains(item))
