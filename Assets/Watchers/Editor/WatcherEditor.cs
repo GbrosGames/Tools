@@ -18,7 +18,6 @@ namespace Gbros.Watchers
         public const string WatcherSidebarButtonActiveClassName = "watcher-sidebar-button-active";
         public const string WatcherCardTitleClassName = "watcher-card-container-title";
 
-
         public Watcher CurrentWatcher { get; private set; }
         public WatcherBoard CurrentBoard { get; private set; }
         public VisualElement BoardContainer { get; private set; }

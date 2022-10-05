@@ -21,7 +21,7 @@ namespace Gbros.Watchers
             Key = key;
             GroupKey = groupKey;
             Selector = new WatcherSelector(this);
-            Path = GroupKey + Path;
+            Path = Watchers.CreatePath(key, groupKey);
         }
 
         public List<WatcherBoard> Boards { get; private set; } = new List<WatcherBoard>();

@@ -58,6 +58,10 @@ namespace Gbros.Watchers.Samples.Example1
                           .AddProperty("SomeValue in someNonSerializableClass", someNotUnityObjectClass, x => x.SomeValue, x => someNotUnityObjectClass.SomeValue = x)
                           .AddActionButton("Some Action", () => { Debug.Log($"Value from nonUnityObjectClass - {someNotUnityObjectClass.SomeValue}"); });
 
+            Watchers.Watcher("Watcher A")
+                        .Board("Board AAA")
+                        .Card("Card AAA");
+
             Watchers.Watcher("Watcher B", "Some Group")
                         .Board("Board C")
                         .Card("Card B2");
@@ -69,11 +73,15 @@ namespace Gbros.Watchers.Samples.Example1
             Watchers.Watcher("Watcher B", "Some Group\\1")
                     .Board("Board1 asdasdasdC")
                     .Card("Card1 Bsss2");
+            
+            Watchers.Watcher("Watcher B", "Some Group\\1")
+                   .Board("Board2 2222")
+                   .Card("Card2 222");
 
             Watchers.Watcher("Watcher B2", "Some Group\\1")
                    .Board("Board2")
                    .Card("Card2 ");
-            
+
             Watchers.Watcher("Watcher B222", "Some Group\\1\\2")
                   .Board("Board23")
                   .Card("Card23 ");

@@ -30,7 +30,7 @@ namespace Gbros.Watchers
         {
             Logger?.Invoke($"Watchers: Trying to get watcher {key}");
 
-            var item = All.Find(x => x.Path == groupKey + key);
+            var item = All.Find(x => x.Path == CreatePath(key, groupKey));
             if (item is not null)
             {
                 if (!Disposables.Contains(item))
@@ -111,6 +111,8 @@ namespace Gbros.Watchers
             Cleared?.Invoke();
             EditorCallbacks = null;
         }
+
+        public static string CreatePath(string key, string groupKey = null) => string.IsNullOrEmpty(groupKey) ? key : groupKey + "\\" + key;
     }
 }
 #endif
