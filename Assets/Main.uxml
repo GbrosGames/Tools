@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Global.uss?fileID=7433441132597879392&amp;guid=88c17a75bbfa3e74d9d4b6c5a175dcf6&amp;type=3#Global" />
+    <ui:VisualElement>
+        <Container Size="36" Count="29" class="container" />
+    </ui:VisualElement>
+</ui:UXML>

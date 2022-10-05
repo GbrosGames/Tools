@@ -1,4 +1,3 @@
-#if UNITY_EDITOR
 using UniRx;
 using System;
 using UnityEngine;
@@ -189,4 +188,3 @@ namespace Gbros.Watchers
         }
     }
 }
-#endif

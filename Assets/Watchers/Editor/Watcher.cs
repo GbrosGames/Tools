@@ -11,11 +11,14 @@ namespace Gbros.Watchers
     {
         public bool IsDisposed { get; private set; }
         public CompositeDisposable Disposables { get; } = new CompositeDisposable();
+
+        public WatcherSelector Selector { get; }
         
         internal Watcher(string key = Watchers.Default, string groupKey = null)
         {
             Key = key;
             GroupKey = groupKey;
+            Selector = new WatcherSelector(this);
         }
 
         public List<WatcherBoard> Boards { get; private set; } = new List<WatcherBoard>();

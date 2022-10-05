@@ -22,7 +22,7 @@ namespace Gbros.Watchers
         public Watcher CurrentWatcher { get; private set; }
         public WatcherBoard CurrentBoard { get; private set; }
         public VisualElement BoardContainer { get; private set; }
-        
+
         public VisualElement LeftPanel { get; private set; }
         public VisualElement RightPanel { get; private set; }
 
@@ -89,7 +89,7 @@ namespace Gbros.Watchers
             Watchers.Created += OnWatcherCreated;
             Watchers.Cleared += OnWatchersCleared;
 
-            
+
             foreach (var watcher in Watchers.All)
             {
                 OnWatcherCreated(watcher);
@@ -153,7 +153,7 @@ namespace Gbros.Watchers
             {
                 ChangeCurrentWatcher(board?.Watcher);
             }
-            
+
             if (CurrentBoard is not null && Topbar.TryQ<Button>(out var button, CurrentBoard.viewDataKey))
             {
                 button.RemoveFromClassList(WatcherTopbarButtonActiveClassName);
@@ -201,22 +201,20 @@ namespace Gbros.Watchers
             BoardContainer?.Clear();
             Topbar?.Clear();
             Sidebar?.Clear();
-            LeftPanel?.Clear();
         }
 
         private void OnWatcherCreated(Watcher watcher)
         {
             Watchers.Logger?.Invoke($"Watchers: Editor - adding {watcher.Key} to left panel");
-            
-            var watcherSelector = new WatcherSelector(watcher);
-            watcherSelector.clicked += () => ChangeCurrentWatcher(watcher);
+
+            watcher.Selector.clicked += () => ChangeCurrentWatcher(watcher);
 
             if (watcher.GroupKey is not null)
             {
                 var keys = watcher.GroupKey.Split('\\');
 
                 VisualElement currentElement = Sidebar;
-                
+
                 for (var i = 0; i < keys.Length; i++)
                 {
                     var key = keys[i];
@@ -233,14 +231,14 @@ namespace Gbros.Watchers
                     }
 
                     currentElement = foldout;
-                    
+
                 }
 
-                currentElement.Add(watcherSelector);
+                currentElement.Add(watcher.Selector);
             }
             else
             {
-                Sidebar.Add(watcherSelector);
+                Sidebar.Add(watcher.Selector);
             }
         }
 

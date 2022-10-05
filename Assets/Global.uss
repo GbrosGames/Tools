@@ -1,0 +1,16 @@
+Slot {
+    margin: 5px;
+    background-color: rgb(9, 19, 21);
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+Container {
+    flex-shrink: 0;
+    flex-grow: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+

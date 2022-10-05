@@ -17,7 +17,8 @@ namespace Gbros.Watchers
         public static event Action<Watcher> Deleted;
         public static event Action Cleared;
         public const string Default = nameof(Watcher);
-        public const string DefaultEditorPath = "Packages/com.gbros.tools.watchers/Editor/";
+        //public const string DefaultEditorPath = "Packages/com.gbros.tools.watchers/Editor/";
+        public const string DefaultEditorPath = "Assets/Watchers/Editor/";
         public static string DefaultEditorStylePath = $"{DefaultEditorPath}WatcherEditor.uss";
         public static string DefaultEditorUXMLPath = $"{DefaultEditorPath}WatcherEditor.uxml";
         public static string EditorStylePath = $"{DefaultEditorPath}WatcherEditor.uss";

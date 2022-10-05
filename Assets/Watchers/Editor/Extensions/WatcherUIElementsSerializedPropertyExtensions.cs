@@ -1,5 +1,4 @@
-﻿#if UNITY_EDITOR
-using System;
+﻿using System;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using System.Linq.Expressions;
@@ -12,7 +11,8 @@ namespace Gbros.Watchers
         public static TSource AddSerializedProperty<TSource, TTarget, TProperty>(this TSource source,
          TTarget target,
          Expression<Func<TTarget, TProperty>> propertySelector,
-         string name = null)
+         string name = null,
+         Action<PropertyField> callback = null)
      where TSource : VisualElement, IWatcherElement
      where TTarget : UnityEngine.Object
         {
@@ -23,14 +23,22 @@ namespace Gbros.Watchers
             }
 
             var propertyName = propertySelector.GetName();
-            source.Add(name ?? propertyName, new PropertyField(serializedObject.FindProperty(propertyName), name ?? propertyName), field => field.Bind(serializedObject));
+            
+            source.Add(name ?? propertyName,
+                new PropertyField(serializedObject.FindProperty(propertyName), name ?? propertyName),
+                field => 
+                { 
+                    field.Bind(serializedObject); 
+                    callback?.Invoke(field); 
+                });
             return source;
         }
 
         public static TSource AddSerializedProperty<TSource, TTarget>(this TSource source,
          TTarget target,
          string propertyName,
-         string name = null)
+         string name = null,
+         Action<PropertyField> callback = null)
      where TSource : VisualElement, IWatcherElement
      where TTarget : UnityEngine.Object
         {
@@ -40,9 +48,14 @@ namespace Gbros.Watchers
                 source.Watcher.SerializedObjects.Add(target, serializedObject);
             }
 
-            source.Add(name ?? propertyName, new PropertyField(serializedObject.FindProperty(propertyName), name ?? propertyName), field => field.Bind(serializedObject));
+            source.Add(name ?? propertyName, 
+                new PropertyField(serializedObject.FindProperty(propertyName), name ?? propertyName),
+                 field =>
+                 {
+                     field.Bind(serializedObject);
+                     callback?.Invoke(field);
+                 });
             return source;
         }
     }
 }
-#endif
