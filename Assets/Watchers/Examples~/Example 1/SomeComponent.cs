@@ -45,6 +45,26 @@ namespace Gbros.Watchers.Samples.Example1
                            .AddSerializedProperty(this, x => x.SomeClass)
                            .AddProperty("SomeValue in someNonSerializableClass", someNotUnityObjectClass, x => x.SomeValue, x => someNotUnityObjectClass.SomeValue = x)
                            .AddActionButton("Some Action", () => { Debug.Log($"Value from nonUnityObjectClass - {someNotUnityObjectClass.SomeValue}"); });
+
+            Watchers.Watcher("Watcher B", "Some Group")
+                          .Board("Board B")
+                          .Card("Card B")
+                          .Container("Container B")
+                          .AddSelectorButton($"Select {gameObject.name}", gameObject)
+                          .AddSerializedProperty(this, x => x.SomeValue)
+                          .AddSerializedProperty(this, "SomeVector2")
+                          .AddSerializedProperty(this, x => x.SomeVector3)
+                          .AddSerializedProperty(this, x => x.SomeClass)
+                          .AddProperty("SomeValue in someNonSerializableClass", someNotUnityObjectClass, x => x.SomeValue, x => someNotUnityObjectClass.SomeValue = x)
+                          .AddActionButton("Some Action", () => { Debug.Log($"Value from nonUnityObjectClass - {someNotUnityObjectClass.SomeValue}"); });
+
+            Watchers.Watcher("Watcher B2", "Some Group")
+                        .Board("Board B2")
+                        .Card("Card B2")
+                        .Container("Container B")
+                        .AddSelectorButton($"Select {gameObject.name}", gameObject)
+                        .AddProperty("SomeValue in someNonSerializableClass", someNotUnityObjectClass, x => x.SomeValue, x => someNotUnityObjectClass.SomeValue = x)
+                        .AddActionButton("Some Action", () => { Debug.Log($"Value from nonUnityObjectClass - {someNotUnityObjectClass.SomeValue}"); });
 #endif
         }
     }
