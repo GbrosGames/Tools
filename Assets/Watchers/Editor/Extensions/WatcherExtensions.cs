@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UniRx;
 using System;
 
@@ -9,3 +10,4 @@ namespace Gbros.Watchers
         public static void AddTo(this IDisposable disposable, IWatcherElement watcherElement) => disposable.AddTo(watcherElement.Watcher);
     }
 }
+#endif

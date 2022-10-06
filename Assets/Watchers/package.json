@@ -1,9 +1,9 @@
 {
   "name": "com.gbros.tools.watchers",
   "displayName": "Gbros - Watchers",
-  "description": "Watchers is a collection of handy windows and extensions that will speed up your workflow and make your life easier. See more on our blog post - https://www.gbrosgames.com/blog",
+  "description": "Watchers is a collection of handy debugging windows. See more on our blog post - https://www.gbrosgames.com/blog",
   "license": "MIT",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "keywords": [
     "UniRx",
     "Gbros"

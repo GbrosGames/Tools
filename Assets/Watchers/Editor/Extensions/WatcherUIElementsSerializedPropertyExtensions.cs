@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+using System;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using System.Linq.Expressions;
@@ -59,3 +60,4 @@ namespace Gbros.Watchers
         }
     }
 }
+#endif

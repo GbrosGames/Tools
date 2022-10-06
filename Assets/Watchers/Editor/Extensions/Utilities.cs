@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEngine;
 
 namespace Gbros.Watchers
@@ -7,3 +8,4 @@ namespace Gbros.Watchers
         public static Color Color(string hex) => ColorUtility.TryParseHtmlString(hex, out var color) ? color : UnityEngine.Color.white;
     }
 }
+#endif

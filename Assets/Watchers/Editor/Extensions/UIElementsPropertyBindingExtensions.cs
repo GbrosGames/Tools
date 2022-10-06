@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UniRx;
 using System;
 using UnityEngine;
@@ -16,3 +17,4 @@ namespace Gbros.Watchers
         public static IDisposable BindTo<TEnum>(this EnumField field, IObservable<TEnum> observable) where TEnum: Enum => observable.SubscribeWithState(field, (x, state) => state.value = x);
     }
 }
+#endif
