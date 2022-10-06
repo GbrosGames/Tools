@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System;
 using UnityEngine.UIElements;
 using UnityEditor;
