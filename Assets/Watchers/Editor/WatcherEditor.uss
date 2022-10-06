@@ -38,8 +38,7 @@ WatcherSelector {
 	margin-right:0px;
     background-color:transparent;
     border-width:0px;
-	border-bottom-left-radius:0px;
-	border-bottom-right-radius:0px;
+	border-radius:0px;
 }
 
 WatcherSelector:hover {
@@ -133,4 +132,13 @@ TextField {
 
 .unity-foldout__toggle{
 	margin-left:0px;
+}
+
+.watcher-foldout-active > Toggle > VisualElement > Label {
+	-unity-font-style: bold;
+}
+
+.watcher-foldout-active > Toggle > VisualElement {
+    border-left-width:2px;
+    border-left-color:green;
 }

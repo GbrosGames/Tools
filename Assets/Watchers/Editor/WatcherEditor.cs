@@ -16,6 +16,7 @@ namespace Gbros.Watchers
         public const string WatcherTopbarButtonActiveClassName = "watcher-topbar-button-active";
         public const string WatcherSidebarButtonClassName = "watcher-sidebar-button";
         public const string WatcherSidebarButtonActiveClassName = "watcher-sidebar-button-active";
+        public const string WatcherFoldoutActiveClassName = "watcher-foldout-active";
         public const string WatcherCardTitleClassName = "watcher-card-container-title";
 
         public Watcher CurrentWatcher { get; private set; }
@@ -88,15 +89,21 @@ namespace Gbros.Watchers
             Watchers.Created += OnWatcherCreated;
             Watchers.Cleared += OnWatchersCleared;
 
+            InitializeWatchers();
 
-            foreach (var watcher in Watchers.All)
+            Watchers.EditorCallbacks?.Invoke(this);
+        }
+
+        private void InitializeWatchers()
+        {
+            Cleanup();
+
+            foreach (var watcher in Watchers.All.OrderBy(x => x.Path))
             {
                 OnWatcherCreated(watcher);
             }
 
-            ChangeCurrentWatcher(Watchers.All.OrderBy(x => x.Key).FirstOrDefault());
-
-            Watchers.EditorCallbacks?.Invoke(this);
+            ChangeCurrentWatcher(Watchers.All.OrderBy(x => x.Path).FirstOrDefault());
         }
 
         private void OnWatcherSelectorSelectionChanged(IEnumerable<object> obj)
@@ -128,6 +135,26 @@ namespace Gbros.Watchers
             if (CurrentWatcher is null) return;
 
             CurrentWatcher.Selector.AddToClassList(WatcherSidebarButtonActiveClassName);
+
+            Sidebar.Query<Foldout>().ForEach(x => x.RemoveFromClassList(WatcherFoldoutActiveClassName));
+            
+            if (CurrentWatcher.GroupKey is not null)
+            {
+                var keys = CurrentWatcher.GroupKey.Split('\\');
+
+                var currentElement = Sidebar as VisualElement;
+
+                for (var i = 0; i < keys.Length; i++)
+                {
+                    var key = keys[i];
+
+                    if (currentElement.TryQ<Foldout>(out var foldout, key))
+                    {
+                        currentElement = foldout;
+                        currentElement.AddToClassList(WatcherFoldoutActiveClassName);
+                    }
+                }
+            }
 
             Topbar.Clear();
 
@@ -203,13 +230,14 @@ namespace Gbros.Watchers
         {
             Watchers.Logger?.Invoke($"Watchers: Editor - adding {watcher.Key} to left panel");
 
+            watcher.Selector.clicked -= () => ChangeCurrentWatcher(watcher);
             watcher.Selector.clicked += () => ChangeCurrentWatcher(watcher);
 
             if (watcher.GroupKey is not null)
             {
                 var keys = watcher.GroupKey.Split('\\');
 
-                VisualElement currentElement = Sidebar;
+                var currentElement = Sidebar as VisualElement;
 
                 for (var i = 0; i < keys.Length; i++)
                 {
@@ -242,8 +270,11 @@ namespace Gbros.Watchers
         {
             Watchers.Logger?.Invoke($"Watchers: Editor - adding {watcher.Key} to left panel");
 
-            if (CurrentWatcher?.Key == watcher.Key)
+            InitializeWatchers();
+
+            if (CurrentWatcher == watcher)
             {
+                CurrentWatcher = null;
                 ChangeCurrentWatcher(Watchers.All.FirstOrDefault());
             }
         }

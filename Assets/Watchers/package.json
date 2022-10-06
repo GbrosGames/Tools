@@ -3,7 +3,7 @@
   "displayName": "Gbros - Watchers",
   "description": "Watchers is a collection of handy debugging windows. See more on our blog post - https://www.gbrosgames.com/blog",
   "license": "MIT",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "keywords": [
     "UniRx",
     "Gbros"

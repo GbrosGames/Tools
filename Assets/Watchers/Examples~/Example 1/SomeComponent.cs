@@ -1,5 +1,6 @@
 ﻿using System;
 using Gbros.Watchers.Samples.Example2;
+using UniRx;
 using UnityEngine;
 
 namespace Gbros.Watchers.Samples.Example1
@@ -34,7 +35,7 @@ namespace Gbros.Watchers.Samples.Example1
             };
 
 #if UNITY_EDITOR
-            Watchers.Watcher("Watcher A")
+            Watchers.Watcher("Watcher A" + GetInstanceID()).AddTo(this)
                            .Board("Board A")
                            .Card("Card A")
                            .Container("Container A")
@@ -46,7 +47,7 @@ namespace Gbros.Watchers.Samples.Example1
                            .AddProperty("SomeValue in someNonSerializableClass", someNotUnityObjectClass, x => x.SomeValue, x => someNotUnityObjectClass.SomeValue = x)
                            .AddActionButton("Some Action", () => { Debug.Log($"Value from nonUnityObjectClass - {someNotUnityObjectClass.SomeValue}"); });
 
-            Watchers.Watcher("Watcher B", "Some Group")
+            Watchers.Watcher("Watcher B" + GetInstanceID(), "Some Group").AddTo(this)
                           .Board("Board B")
                           .Card("Card B")
                           .Container("Container B")
@@ -58,31 +59,31 @@ namespace Gbros.Watchers.Samples.Example1
                           .AddProperty("SomeValue in someNonSerializableClass", someNotUnityObjectClass, x => x.SomeValue, x => someNotUnityObjectClass.SomeValue = x)
                           .AddActionButton("Some Action", () => { Debug.Log($"Value from nonUnityObjectClass - {someNotUnityObjectClass.SomeValue}"); });
 
-            Watchers.Watcher("Watcher A")
+            Watchers.Watcher("Watcher A" + GetInstanceID()).AddTo(this)
                         .Board("Board AAA")
                         .Card("Card AAA");
 
-            Watchers.Watcher("Watcher B", "Some Group")
+            Watchers.Watcher("Watcher B" + GetInstanceID(), "Some Group").AddTo(this)
                         .Board("Board C")
                         .Card("Card B2");
 
-            Watchers.Watcher("Watcher B", "Some Group aaa")
+            Watchers.Watcher("Watcher B" + GetInstanceID(), "Some Group aaa").AddTo(this)
                        .Board("Board asdasdasdC")
                        .Card("Card Bsss2");
 
-            Watchers.Watcher("Watcher B", "Some Group\\1")
+            Watchers.Watcher("Watcher B" + GetInstanceID(), "Some Group\\1").AddTo(this)
                     .Board("Board1 asdasdasdC")
                     .Card("Card1 Bsss2");
             
-            Watchers.Watcher("Watcher B", "Some Group\\1")
+            Watchers.Watcher("Watcher B" + GetInstanceID(), "Some Group\\1").AddTo(this)
                    .Board("Board2 2222")
                    .Card("Card2 222");
 
-            Watchers.Watcher("Watcher B2", "Some Group\\1")
+            Watchers.Watcher("Watcher B2" + GetInstanceID(), "Some Group\\1").AddTo(this)
                    .Board("Board2")
                    .Card("Card2 ");
 
-            Watchers.Watcher("Watcher B222", "Some Group\\1\\2")
+            Watchers.Watcher("Watcher B222" + GetInstanceID(), "Some Group\\1\\2").AddTo(this)
                   .Board("Board23")
                   .Card("Card23 ");
 #endif

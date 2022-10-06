@@ -64,8 +64,7 @@ namespace Gbros.Watchers
             Disposables.Dispose();
             Disposables.Clear();
             Cleanup();
-            Watchers.Delete(Key);
-
+            Watchers.Delete(Path);
         }
     }
 }

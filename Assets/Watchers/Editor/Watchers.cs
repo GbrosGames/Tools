@@ -74,9 +74,9 @@ namespace Gbros.Watchers
             EditorCallbacks -= callback;
         }
 
-        public static void Delete(string key = Default)
+        public static void Delete(string path)
         {
-            var watcher = All.Find(x => x.Key == key);
+            var watcher = All.Find(x => x.Path == path);
             if (watcher is null) return;
 
             if (!watcher.IsDisposed)
